@@ -3,12 +3,14 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const productRouter = require('./src/routes/product');
+const categoryRouter = require('./src/routes/category');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/products', productRouter);
+app.use('/categories', categoryRouter);
 
 mongoose.connect('mongodb://localhost:27017/ptz_burgers')
     .then(result => {

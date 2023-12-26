@@ -1,8 +1,13 @@
 const Product = require('../models/product');
 
 exports.index = async (req, res, next) => {
-    const products = await Product.find({});
-    res.json(products);
+    const category = req.query.category;
+    let categoryFilter = {};
+    if(category){
+        categoryFilter = {category: category}
+    }
+    const product = await Product.find(categoryFilter);
+    res.json(product);
 }
 
 exports.show = async (req, res, next) => {
@@ -11,7 +16,7 @@ exports.show = async (req, res, next) => {
     res.json(product);
 }
 
-exports.create = async (req, res, next) => {
+exports.store = async (req, res, next) => {
     const category = req.body.category;
     const title = req.body.title;
     const description = req.body.description;
